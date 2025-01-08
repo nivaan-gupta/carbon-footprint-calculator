@@ -1,0 +1,80 @@
+def calculate_transport_emissions(vehicle_type, distance):
+    transport_emission_factors = {
+        'car': 0.24,  
+        'bus': 0.08,  
+        'train': 0.05,  
+        'bike': 0.0,  
+        'walking': 0.0  
+    }
+    return transport_emission_factors.get(vehicle_type.lower(), 0) * distance
+
+def calculate_energy_emissions(electricity_usage):
+    emission_factor = 0.92  
+    return electricity_usage * emission_factor
+
+def calculate_diet_emissions(diet_type):
+    diet_emission_factors = {
+        'vegan': 1.5, 
+        'vegetarian': 2.0,
+        'omnivore': 3.0
+    }
+    return diet_emission_factors.get(diet_type.lower(), 0)
+
+def calculate_water_usage_emissions(water_usage):
+    emission_factor = 0.36  
+    return water_usage * emission_factor
+
+def calculate_waste_emissions(waste_amount):
+    emission_factor = 0.25  
+    return waste_amount * emission_factor
+
+def calculate_air_travel_emissions(flight_hours):
+    emission_factor = 90  
+    return flight_hours * emission_factor
+
+def main():
+    print("🌍 Carbon Footprint Calculator 🌱")
+    
+    vehicle = input("Enter your primary mode of transport (car, bus, train, bike, walking): ")
+    distance = float(input("Enter the average distance traveled daily (in km): "))
+    transport_emissions = calculate_transport_emissions(vehicle, distance)
+    
+    electricity = float(input("Enter your monthly electricity usage (in kWh): "))
+    energy_emissions = calculate_energy_emissions(electricity)
+    
+    diet = input("Enter your diet type (vegan, vegetarian, omnivore): ")
+    diet_emissions = calculate_diet_emissions(diet)
+    
+    water_usage = float(input("Enter your monthly water usage (in cubic meters): "))
+    water_emissions = calculate_water_usage_emissions(water_usage)
+    
+    waste_amount = float(input("Enter your monthly waste generation (in kg): "))
+    waste_emissions = calculate_waste_emissions(waste_amount)
+    
+    flight_hours = float(input("Enter your total flight hours in a month: "))
+    air_travel_emissions = calculate_air_travel_emissions(flight_hours)
+    
+    total_emissions = (
+        transport_emissions * 30 +
+        energy_emissions +
+        diet_emissions * 30 +
+        water_emissions +
+        waste_emissions +
+        air_travel_emissions
+    )
+    print("Your Monthly Carbon Footprint")
+    print(f"Transport Emissions: {transport_emissions * 30:.2f} kg CO2")
+    print(f"Energy Emissions: {energy_emissions:.2f} kg CO2")
+    print(f"Diet Emissions: {diet_emissions * 30:.2f} kg CO2")
+    print(f"Water Usage Emissions: {water_emissions:.2f} kg CO2")
+    print(f"Waste Emissions: {waste_emissions:.2f} kg CO2")
+    print(f"Air Travel Emissions: {air_travel_emissions:.2f} kg CO2")
+    print(f"Total Emissions: {total_emissions:.2f} kg CO2")
+    
+    if total_emissions > 1500:
+        print("⚠️ Your carbon footprint is high. Consider reducing air travel, electricity usage, and improving waste management.")
+    else:
+        print("✅ Your carbon footprint is within a sustainable range. Keep it up!")
+
+if __name__ == '__main__':
+    main()
